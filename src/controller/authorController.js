@@ -6,10 +6,7 @@ const jwt = require("jsonwebtoken");
 exports.createAuthors = async function (req, res) {
     try {
         let authorsData = req.body;
-        console.log(authorsData)
-        console.log(req.body)
-        console.log(Object.keys(authorsData).length)
-
+       
         //check if the data in request body is present or not ?
         if (!Object.keys(authorsData).length) {
             return res.status(400).send({ status: false, msg: "Please Enter the Data in Request Body" });
@@ -53,14 +50,20 @@ exports.createAuthors = async function (req, res) {
 
 
 exports.authorLogin = async function (req, res) {
+    try{
 
+    //get email and password  from req.body
     let { email, password } = req.body;
-
-
+    // find the object as per email & password
     let author = await authorModel.findOne({ email: email, password: password });
 
     if (!author) return res.status(400).send({ status: false, msg: "authorname or the password is not corerct", });
+<<<<<<< HEAD
 
+=======
+    
+    //create the Token 
+>>>>>>> 6fd0c16cd1562177eea1ff0aaae04ae89240b3ec
     let token = jwt.sign(
         {
             authorId: author._id.toString(),
@@ -68,9 +71,14 @@ exports.authorLogin = async function (req, res) {
         },
         "MSgroup-3"
     );
-
     res.setHeader("x-auth-token", token);
     res.status(201).send({ status: true, data: token });
+<<<<<<< HEAD
+=======
+    }catch(err){
+        return res.status(500).send({ status: false, msg: error.message })
+    }
+>>>>>>> 6fd0c16cd1562177eea1ff0aaae04ae89240b3ec
 };
 
 
