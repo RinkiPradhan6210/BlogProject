@@ -58,12 +58,8 @@ exports.authorLogin = async function (req, res) {
     let author = await authorModel.findOne({ email: email, password: password });
 
     if (!author) return res.status(400).send({ status: false, msg: "authorname or the password is not corerct", });
-<<<<<<< HEAD
-
-=======
     
     //create the Token 
->>>>>>> 6fd0c16cd1562177eea1ff0aaae04ae89240b3ec
     let token = jwt.sign(
         {
             authorId: author._id.toString(),
@@ -73,12 +69,9 @@ exports.authorLogin = async function (req, res) {
     );
     res.setHeader("x-auth-token", token);
     res.status(201).send({ status: true, data: token });
-<<<<<<< HEAD
-=======
     }catch(err){
         return res.status(500).send({ status: false, msg: error.message })
     }
->>>>>>> 6fd0c16cd1562177eea1ff0aaae04ae89240b3ec
 };
 
 

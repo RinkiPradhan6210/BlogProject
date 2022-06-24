@@ -8,13 +8,7 @@ exports.authentication = async function (req, res, next) {
         //validate this token
         let token = req.headers["X-Auth-Token"];
         if (!token) token = req.headers["x-auth-token"];
-<<<<<<< HEAD
-        let decodedToken;
-        //If no token is present in the request header ,return error
-        if (!token) return res.status(400).send({ status: false, msg: "token must be present" });
-=======
         
->>>>>>> 6fd0c16cd1562177eea1ff0aaae04ae89240b3ec
 
         //If no token is present in the request header ,return error
         if (!token) return res.status(400).send({ status: false, msg: "token must be present" });
