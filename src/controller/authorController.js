@@ -59,7 +59,7 @@ exports.authorLogin = async function (req, res) {
 
     let author = await authorModel.findOne({ email: email, password: password });
 
-    if (!author) return res.send({ status: false, msg: "authorname or the password is not corerct", });
+    if (!author) return res.status(400).send({ status: false, msg: "authorname or the password is not corerct", });
 
     let token = jwt.sign(
         {
@@ -70,7 +70,7 @@ exports.authorLogin = async function (req, res) {
     );
 
     res.setHeader("x-auth-token", token);
-    res.send({ status: true, data: token });
+    res.status(201).send({ status: true, data: token });
 };
 
 

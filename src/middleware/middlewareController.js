@@ -9,7 +9,7 @@ exports.authentication = function (req, res, next) {
         if (!token) token = req.headers["x-auth-token"];
         let decodedToken;
         //If no token is present in the request header ,return error
-        if (!token) return res.send({ status: false, msg: "token must be present" });
+        if (!token) return res.status(400).send({ status: false, msg: "token must be present" });
 
         try {
             decodedToken = jwt.verify(token, "MSgroup-3");
