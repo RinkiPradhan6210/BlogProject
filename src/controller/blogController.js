@@ -102,9 +102,14 @@ exports.getBlogs = async function (req, res) {
         if (Object.keys(rest).length > 0) {
             return res.status(400).send({ status: false, msg: " please provide valide filter key for ex. tags, category, subcategory, authorId. only" })
         }
+
         //check if any quer parm is present ?
         if (Object.keys(req.query).length !== 0) {
-
+        if(!ObjectId.isValid(authorId)){
+            return res.status(400).send({status:false,msg:"invalid authorId in query params"})
+        }
+        
+        
             //add the keyisDeleted &isPublished in req.query
             req.query.isDeleted = false
             req.query.isPublished = true

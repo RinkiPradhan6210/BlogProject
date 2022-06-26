@@ -57,7 +57,7 @@ exports.createAuthors = async function (req, res) {
         if (!password) {
             return res.status(400).send({ status: false, msg: "PassWord is Required" });
         }
-
+        // check password is valid  or not?  (for this we used regular expression(regex) is here) 
         var passwordReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/;
         if (!passwordReg.test(password)) {
             return res.status(400).send({ status: false, msg: "pass is invalid(Minimum 6 and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character Ex. Abc@123,abC%98,@abD34,1999$Sour" });
@@ -97,6 +97,7 @@ exports.authorLogin = async function (req, res) {
         
         // find the object as per email & password
         let author = await authorModel.findOne({ email: email, password: password });
+        console.log(author)
 
         if (!author) return res.status(400).send({ status: false, msg: "email or password is not corerct", });
 
@@ -108,7 +109,7 @@ exports.authorLogin = async function (req, res) {
             },
             "MSgroup-3"
         );
-        // res.setHeader("x-auth-token", token);
+         res.setHeader("x-auth-token", token);
         res.status(201).send({ status: true, data: token });
      
     }catch (err) {
