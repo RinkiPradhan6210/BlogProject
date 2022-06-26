@@ -1,6 +1,6 @@
 const authorModel = require("../models/authorModel")
 var validator = require("email-validator");
-const jwt = require("jsonwebtoken");
+
 
 
 async function authorValidation(req, res, next) {
