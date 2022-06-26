@@ -105,11 +105,12 @@ exports.getBlogs = async function (req, res) {
 
         //check if any quer parm is present ?
         if (Object.keys(req.query).length !== 0) {
-        if(!ObjectId.isValid(authorId)){
-            return res.status(400).send({status:false,msg:"invalid authorId in query params"})
-        }
-        
-        
+
+            //check if id inquery is valid or not
+            if(!ObjectId.isValid(authorId)){
+                return res.status(400).send({status:false,msg:"invalid authorId in query params"})
+            }
+
             //add the keyisDeleted &isPublished in req.query
             req.query.isDeleted = false
             req.query.isPublished = true
