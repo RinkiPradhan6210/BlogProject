@@ -37,7 +37,7 @@ authorLogin = async function (req, res) {
         let author = await authorModel.findOne({ email: email, password: password });
         console.log(author)
 
-        if (!author) return res.status(400).send({ status: false, msg: "email or password is not corerct", });
+        if (!author) return res.status(401).send({ status: false, msg: "email or password is not corerct", });
 
         //create the Token 
         let token = jwt.sign(
@@ -47,7 +47,7 @@ authorLogin = async function (req, res) {
             },
             "MSgroup-3"
         );
-        res.setHeader("x-auth-token", token);
+        res.setHeader("x-api-key", token);
         res.status(201).send({ status: true, data: token });
 
     } catch (err) {
